@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Clubs;
+use App\Models\Managers;
+use App\Models\Players;
+use App\Models\Matches;
+use App\Models\Stadiums;
+
+
 class LandingController extends Controller
 {
     /**
@@ -83,18 +90,22 @@ class LandingController extends Controller
     }
 
     public function clubs(){
-        return view('pages.landing-page.clubs');
+        $clubs = Clubs::orderBy('thropy', 'desc')->get();
+        return view('pages.landing-page.clubs', ['clubs' => $clubs]);
     }
 
     public function players(){
-        return view('pages.landing-page.players');
+        $players = Players::all();
+        return view('pages.landing-page.players', ['players' => $players]);
     }
 
     public function managers(){
-        return view('pages.landing-page.managers');
+        $managers = Managers::all();
+        return view('pages.landing-page.managers', ['managers' => $managers]);
     }
 
     public function stadiums(){
-        return view ('pages.landing-page.stadiums');
+        $stadiums = Stadiums::all();
+        return view ('pages.landing-page.stadiums', ['stadiums' => $stadiums]);
     }
 }
